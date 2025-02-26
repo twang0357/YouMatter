@@ -11,8 +11,16 @@
         <form id = "login-form">
             <input type="email" id = "email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
-            <button type = "login">Login</button>
+            <div class ="remember-me">
+                <input type = "checkbox" id = "remember-me"> <label for="remember-me">Remember Me</label>
+            </div>
+            <button type = "submit">Login</button>
         </form>
+        <div class="links">
+            <a href="createaccount.html" id="create-account">Create New Account</a>
+            <br>
+            <a href="changepass.html" id = "forgot-password">Forgot Password?</a>
+        </div>
         <button id="google-login">Login with Google</button>
     </div>
     <script src="loginpage.js"></script>
