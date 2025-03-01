@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>createaccount</title>
+    <link rel = "stylesheet" href = "createaccount.css">
+</head>
+<body>
+    <div class="createaccount-container">
+        <h1>Create Account</h1>
+        <form id="signup-form">
+            <label for="name">First Name</label>
+            <input type="text" id="fname" name="fname" required>
+
+            <label for="name">Last Name</label>
+            <input type="text" id="lname" name="lname" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" minlength="8" required>
+
+            <label for="confirm-password">Confirm Password</label>
+            <input type="confirm-password" id="confirm-password" minlength="8" required>
+
+            <button type ="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>
