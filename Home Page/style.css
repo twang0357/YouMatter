@@ -1,0 +1,109 @@
+body{
+    background-color:peachpuff;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+}
+.container{
+    padding: 0px;
+    border-radius: 30px;
+    max-width:100%;
+    text-align: center;
+    min-height: 80%;
+    min-width: 80%;
+    color: white;
+}
+
+#userFname{
+    color:black;
+}
+
+.homepage-top-container{
+    background-color:turquoise;
+    padding: 10px;
+    width:100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    box-sizing: border-box;
+    max-height: 1000px;
+}
+
+.homepage-bot-container{
+    background: linear-gradient(to bottom, rgb(11, 170, 170),rgb(201, 212, 212));
+    padding: 10px;
+    width:100%;
+    height: 61.5vh;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 20px;
+}
+
+#medication-list{
+    list-style-type: decimal;
+    margin: 10px; 
+    color: black;
+}
+.medication-item{
+    display: flex;
+}
+
+.med-name{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+}
+
+.med-time{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.med-checkbox{
+    transform: scale(3.5);
+    margin-left: 30px;
+    margin-right: 10px;
+    align-self: center;
+    cursor: pointer;
+}
+
+#logout-button{
+    margin-top: -10px;
+    padding: 0px;
+    width: 20%;
+    border-radius: 40px;
+    background: red;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#add-medication-button{
+    margin-top: 0px;
+    padding: 15px;
+    width: 300px;
+    border-radius: 70px;
+    background: linear-gradient(to bottom, rgba(13, 129, 58, 0.712),rgb(161, 184, 169));
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+body{
+    background-color:peachpuff;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+}
+
+.container{
+    background-color: turquoise;
+    padding: 40px;
+    border-radius: 40px;
+}
+
+h1{
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+div{
+    margin-bottom: 10px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+button{
+    margin-top: 10px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 70px;
+    background: linear-gradient(to bottom, rgba(13, 129, 58, 0.712),rgb(161, 184, 169));
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    align-self: center;
+}
+
+
+
+
+

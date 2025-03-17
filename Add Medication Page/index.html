@@ -3,8 +3,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AddMedication</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <form>
+            <h1>ADDING MEDICATION</h1>
+            
+            <div class="medication-name-div">
+                <label for="medication-name">Medication Name:</label>
+                <input type="text" id="medication-name" name="medication-name" required>
+            </div>
+
+            <div class="start-div">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date" required>
+            </div>
+            
+            <div class="medication-frequency-div">
+                <label for="medication-frequency">Frequency:</label>
+                <input type="number" id="medication-frequency" name="medication-frequency" required min="1">
+                <select id="frequency-unit" name="frequency-unit" required>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                </select>
+            </div>
+
+            <div class="Quantity-div">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" required min="1">
+            </div>
+
+            <div class="importance-div">
+                <label for="importance">Importance:</label>
+                <select id="importance" name="importance">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <button type="submit">Add Medication</button>
+        </form>
+    </div>
+    <script src="addmed.js"></script>
 </body>
 </html>

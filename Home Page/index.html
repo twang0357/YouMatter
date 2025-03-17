@@ -3,8 +3,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class= "container">
+    <div class="homepage-top-container">
+        <h1>Welcome, <span id="userFName">Fname</span>!</h1>
+        <h2>Your Medication for Today</h2>
+        <button id="logout-button">Logout</button>
+    </div>
     
+    <div class="homepage-bot-container">
+        <ul id="medication-list">
+            <!--med list under here-->
+            <li>
+            <div class="medication-item">
+                <span class="med-name">Medication name1</span>
+                <span class="med-time">08:00AM</span>
+                <input type="checkbox" class="med-checkbox">
+            </div>
+            </li>
+
+            <li>
+                <div class="medication-item">
+                <span class="med-name">Medication name2</span>
+                <span class="med-time">10:00AM</span>
+                <input type="checkbox" class="med-checkbox">
+            </div>
+            </li>
+
+        </ul>
+        <button id="add-medication-button">Add More Medication</button>
+    </div>
+</div>
+    <script src="homepage.js"></script>
 </body>
 </html>
