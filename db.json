@@ -1,7 +1,6 @@
 {
   "accounts": [
     {
-      "account_id": 1,
       "fname": "John",
       "lname": "Doe",
       "email": "johndoe@example.com",
@@ -10,18 +9,12 @@
     },
     {
       "id": "135c",
-      "firstName": "Tao",
-      "lastName": "Wang",
-      "email": "twang0357@gmail.com",
+      "firstName": "Jason",
+      "lastName": "Maze",
+      "email": "t@gmail.com",
       "password": "Banana123"
     },
-    {
-      "id": "d191",
-      "firstName": "Tao",
-      "lastName": "Wang",
-      "email": "twang0357@gmail.com",
-      "password": "Banana123"
-    },
+
     {
       "id": "6664",
       "firstName": "John",
