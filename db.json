@@ -1,0 +1,33 @@
+{
+  "accounts": [
+    {
+      "account_id": 1,
+      "fname": "John",
+      "lname": "Doe",
+      "email": "johndoe@example.com",
+      "password": "password123",
+      "id": "a71d"
+    },
+    {
+      "id": "135c",
+      "firstName": "Tao",
+      "lastName": "Wang",
+      "email": "twang0357@gmail.com",
+      "password": "Banana123"
+    },
+    {
+      "id": "d191",
+      "firstName": "Tao",
+      "lastName": "Wang",
+      "email": "twang0357@gmail.com",
+      "password": "Banana123"
+    },
+    {
+      "id": "6664",
+      "firstName": "John",
+      "lastName": "Smithy",
+      "email": "Smiths@gmail.com",
+      "password": "Hi1234567"
+    }
+  ]
+}
