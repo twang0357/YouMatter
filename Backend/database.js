@@ -41,6 +41,21 @@ async function createAccount(fname, lname, email, password){
     );
 }
 
+async function updateAccountPassword (account_id, newPassword) {
+    try{
+        const[result] = await pool.query(`
+        UPDATE accounts
+        SET password = ?
+        WHERE account_id = ?`,
+    [newPassword, account_id]);
+
+    return result;
+        
+    } catch(err){
+        throw err;
+    }
+};
+
 // Medication functions
 
 async function getAllMedications() {
@@ -71,5 +86,6 @@ export {
     getAllMedications, 
     getMedicationInfoByID, 
     createMedication, 
-    getAccountInfoByEmail
+    getAccountInfoByEmail,
+    updateAccountPassword
 };
