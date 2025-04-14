@@ -13,3 +13,5 @@
 -3/17/25 Added HTML and CSS to Add medication and Home Page. Forgot to commit changes.
 
 -3/30/25 finished JS for create account page. Set up sql2, node.js, etc. Wrote SQL tables, wrote the js for the tables using pool. Set up Jsons for accounts storage. Added ENV
+
+- 4/12/25 finished JS for change password page, edited the backend with a function to process this change on the database.
