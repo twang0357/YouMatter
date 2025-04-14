@@ -8,13 +8,14 @@ import{
     getAllMedications, 
     getMedicationInfoByID, 
     createMedication,
-    getAccountInfoByEmail
+    getAccountInfoByEmail,
+    updateAccountPassword
 }from './database.js';
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(cors()); // using this to help test the frontend/back end. Get rid of this later. Isnt good
+app.use(cors());
 app.use(express.json());
 
 // getting started
@@ -109,6 +110,31 @@ app.post('/login', async (req,res) => {
         }
     } catch (err){
         res.status(500).json({error : 'Server error: ' + err.message});
+    }
+});
+
+// change password
+
+app.post('/change-password', async (req, res) => {
+    const { email, currentPassword, newPassword } = req.body;
+
+    try {
+        const rows = await getAccountInfoByEmail(email);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Account not found' });
+        }
+
+        const account = rows[0];
+        if (account.password !== currentPassword) {
+            return res.status(400).json({ message: 'Current password is incorrect' });
+        }
+
+        await updateAccountPassword(account.account_id, newPassword);
+
+        res.status(200).json({ message: 'Password updated successfully' });
+
+    } catch (err) {
+        res.status(500).json({ message: 'Server error: ' + err.message });
     }
 });
 
