@@ -15,6 +15,7 @@ document.getElementById('login-form').addEventListener('submit' , async (e) => {
         const data = await response.json();
 
         if(response.ok){
+            localStorage.setItem('account_id', data.account_id);
             alert("Successful Login");
             window.location.href = '/Home-Page/homepage.html';
         } else{
