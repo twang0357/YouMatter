@@ -9,7 +9,8 @@ import{
     getMedicationInfoByID, 
     createMedication,
     getAccountInfoByEmail,
-    updateAccountPassword
+    updateAccountPassword,
+    getMedicationsForToday
 }from './database.js';
 dotenv.config();
 
@@ -35,7 +36,7 @@ app.get('/accounts', async (req,res) => {
 
 // get accounts by id
 app.get('/accounts/:id', async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     try {
         const account = await getAccountInfoByID(id);
         if (account.length > 0){
@@ -51,7 +52,11 @@ app.get('/accounts/:id', async (req, res) => {
 // create account
 
 app.post('/accounts', async(req,res) => {
-    const {fname, lname, email, password } = req.body;
+    const { fname, 
+            lname, 
+            email, 
+            password 
+    } = req.body;
     try{
         await createAccount (fname, lname, email, password);
         res.status(201).json({message: 'Account created'});
@@ -72,7 +77,7 @@ app.get('/medications', async (req, res) => {
 //get medication by  id
 
 app.get('/medications/:id', async (req, res) => {
-    const {id} = req.params;
+    const{ id } = req.params;
     try{
         const medication = await getMedicationInfoByID(id);
         if (medication.length > 0){
@@ -85,26 +90,44 @@ app.get('/medications/:id', async (req, res) => {
     }
 });
 
+//create medication 
+
 app.post('/medications', async (req, res) => {
-    const{ account_id, name, start_date, frequency, frequency_unit, dosage, dosage_unit, quantity, importance} = req.body;
+    const{ account_id, 
+            name, 
+            start_date, 
+            times_per_day,  
+            dosage, 
+            dosage_unit, 
+            quantity, 
+            importance
+    } = req.body;
+
+    if (!account_id || !name || !start_date || !times_per_day || !dosage || !dosage_unit || !quantity || !importance) {
+        return res.status(400).json({ message: 'All fields are required' });
+    };
+
     try {
-        await createMedication(account_id, name, start_date, frequency, frequency_unit, dosage, dosage_unit, quantity, importance);
+        await createMedication(account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, importance);
         res.status(201).json({message: 'Medication created'});
     }catch (err){
+        console.error("Error creating medication:", err);
         res.status(500).json({error: err.message});
-    }
+    };
 });
 
 // for login
 
 app.post('/login', async (req,res) => {
-    const {email, password} =req.body;
+    const { email, 
+            password
+    } =req.body;
     try {
         const rows = await getAccountInfoByEmail(email); 
         const account = rows.length > 0 ? rows[0] : null;
 
         if (account && account.password === password){
-            res.status(200).json({ message: 'Login Successful',});
+            res.status(200).json({ message: 'Login Successful', account_id: account.account_id});
         } else {
             res.status(400).json({ error: 'Invalid Credentials'});
         }
@@ -116,7 +139,10 @@ app.post('/login', async (req,res) => {
 // change password
 
 app.post('/change-password', async (req, res) => {
-    const { email, currentPassword, newPassword } = req.body;
+    const { email, 
+            currentPassword, 
+            newPassword 
+        } = req.body;
 
     try {
         const rows = await getAccountInfoByEmail(email);
@@ -135,6 +161,33 @@ app.post('/change-password', async (req, res) => {
 
     } catch (err) {
         res.status(500).json({ message: 'Server error: ' + err.message });
+    }
+});
+
+app.get('/user/:accountId', async (req, res) => {
+    const { accountId } = req.params;
+
+    try {
+        const rows = await getAccountInfoByID(accountId);
+        const user = rows.length > 0 ? rows[0] : null;
+
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Server error: ' + err.message });
+    }
+});
+
+app.get('/medications/today/:accountId', async (req, res) => {
+    const { accountId } = req.params;
+    try {
+        const rows = await getMedicationsForToday(accountId);
+        res.status(200).json(rows);
+    } catch (err) {
+        res.status(500).json({ error: 'Server error: ' + err.message });
     }
 });
 

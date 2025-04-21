@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
+import { format } from 'date-fns';
 dotenv.config()
 
 const pool = mysql.createPool({
@@ -36,8 +37,7 @@ async function getAccountInfoByID(account_id) {
 async function createAccount(fname, lname, email, password){
     await pool.query(`
         INSERT INTO accounts (fname, lname, email, password)
-        VALUES(?,?,?,?)`,
-        [fname,lname,email,password]
+        VALUES(?,?,?,?)`, [fname,lname,email,password]
     );
 }
 
@@ -46,8 +46,7 @@ async function updateAccountPassword (account_id, newPassword) {
         const[result] = await pool.query(`
         UPDATE accounts
         SET password = ?
-        WHERE account_id = ?`,
-    [newPassword, account_id]);
+        WHERE account_id = ?`, [newPassword, account_id]);
 
     return result;
         
@@ -71,12 +70,25 @@ async function getMedicationInfoByID(medication_id) {
     return rows;
 }
 
-async function createMedication(account_id, name, start_date, frequency, frequency_unit, dosage, dosage_unit, quantity, importance) {
+async function createMedication(account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, importance) {
     await pool.query(`
-        INSERT INTO medications (account_id, name, start_date, frequency, frequency_unit, dosage, dosage_unit, quantity, importance)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [account_id, name, start_date, frequency, frequency_unit, dosage, dosage_unit, quantity, importance]
+        INSERT INTO medications (account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, importance)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, importance]
     );
+}
+
+async function getMedicationsForToday(accountId) {
+    const today = format(new Date(), 'yyyy-MM-dd');
+
+    const [rows] = await pool.query(`
+        SELECT * 
+        FROM medications
+        WHERE account_id = ? 
+        AND start_date <= ?
+        ORDER BY start_date`, [accountId, today]);
+
+    return rows;
 }
 
 export { 
@@ -87,5 +99,6 @@ export {
     getMedicationInfoByID, 
     createMedication, 
     getAccountInfoByEmail,
-    updateAccountPassword
+    updateAccountPassword,
+    getMedicationsForToday
 };
