@@ -41,9 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         medications.forEach((medication) => {
             const li = document.createElement('li');
+            const totalDaysLeft = medication.quantity / medication.times_per_day;
             li.innerHTML = `
             <div class = "medication-item">
                 <span class="med-name">${medication.name}</span>
+                <span class="med-dosage">${medication.dosage}</span>
+                <span class="med-dosage-unit">${medication.dosage_unit}</span>
                 <span class="med-time">${medication.time}</span>
                 <input type="checkbox" class ="med-checkbox">
             </div> `;

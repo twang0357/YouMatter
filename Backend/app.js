@@ -100,15 +100,16 @@ app.post('/medications', async (req, res) => {
             dosage, 
             dosage_unit, 
             quantity, 
-            importance
+            start_time,
+            end_time
     } = req.body;
 
-    if (!account_id || !name || !start_date || !times_per_day || !dosage || !dosage_unit || !quantity || !importance) {
+    if (!account_id || !name || !start_date || !times_per_day || !dosage || !dosage_unit || !quantity || !start_time || !end_time) {
         return res.status(400).json({ message: 'All fields are required' });
     };
 
     try {
-        await createMedication(account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, importance);
+        await createMedication(account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, start_time, end_time);
         res.status(201).json({message: 'Medication created'});
     }catch (err){
         console.error("Error creating medication:", err);

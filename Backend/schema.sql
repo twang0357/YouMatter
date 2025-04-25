@@ -18,7 +18,8 @@ CREATE TABLE medications (
 	dosage DECIMAL(4,1) NOT NULL,
 	dosage_unit VARCHAR(10) NOT NULL,
 	quantity INT UNSIGNED NOT NULL,
-	importance VARCHAR(15),
+	start_time TIME NOT NULL DEFAULT '08:00:00',
+	end_time TIME NOT NULL DEFAULT '20:00:00',
 	FOREIGN KEY(account_id) REFERENCES accounts(account_id)
 		ON DELETE CASCADE
 );

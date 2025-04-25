@@ -1,13 +1,3 @@
-//
-
-const medications = [
-    { name: "Aspirin", time: "08:00 AM" },
-    { name: "Paracetamol", time: "01:00 PM" }
-];
-
-console.log("addmed side: ", medications);
-//
-
 const form = document.getElementById('add-medication-form');
 
 form.addEventListener('submit', async (e) => {
@@ -20,7 +10,8 @@ form.addEventListener('submit', async (e) => {
         dosage: parseFloat(document.getElementById("dosage").value),
         dosage_unit: document.getElementById("dosage-unit").value,
         quantity: parseInt(document.getElementById("quantity").value),
-        importance: document.getElementById("importance").value,
+        start_time: document.getElementById("start_time").value,
+        end_time: document.getElementById("end_time").value,
         account_id: localStorage.getItem("account_id")
     };
 

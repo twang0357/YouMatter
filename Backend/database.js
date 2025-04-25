@@ -70,11 +70,11 @@ async function getMedicationInfoByID(medication_id) {
     return rows;
 }
 
-async function createMedication(account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, importance) {
+async function createMedication(account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, start_time, end_time) {
     await pool.query(`
-        INSERT INTO medications (account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, importance)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, importance]
+        INSERT INTO medications (account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, start_time, end_time)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [account_id, name, start_date, times_per_day, dosage, dosage_unit, quantity, start_time, end_time]
     );
 }
 
