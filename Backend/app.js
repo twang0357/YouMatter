@@ -10,7 +10,9 @@ import{
     createMedication,
     getAccountInfoByEmail,
     updateAccountPassword,
-    getMedicationsForToday
+    getMedicationsForToday,
+    calculateReminderTimes,
+    deleteMedication
 }from './database.js';
 dotenv.config();
 
@@ -186,9 +188,31 @@ app.get('/medications/today/:accountId', async (req, res) => {
     const { accountId } = req.params;
     try {
         const rows = await getMedicationsForToday(accountId);
-        res.status(200).json(rows);
+        console.log("Medications received:", rows);
+        const medicationsWithTimes = rows.map(medication => {
+            const { start_time, end_time, times_per_day } = medication;
+            const reminderTimes = calculateReminderTimes(start_time, end_time, times_per_day);
+            console.log('Calculated reminder times for medication:', reminderTimes);
+            return {
+                ...medication,
+                reminder_times: reminderTimes
+            };
+        });
+        res.status(200).json(medicationsWithTimes);
     } catch (err) {
         res.status(500).json({ error: 'Server error: ' + err.message });
+    }
+});
+
+app.delete('/medications/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        await deleteMedication(id);
+        res.status(200).send({ message: 'Medication deleted successfully' });
+    } catch (err) {
+        console.error("Error deleting medication:", err);
+        res.status(500).send({ message: 'Error deleting medication', error: err.message });
     }
 });
 

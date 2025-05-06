@@ -91,12 +91,15 @@ body{
     margin: 10px;
 }
 
-.med-checkbox{
-    transform: scale(3.5);
-    margin-left: 30px;
+.remove-med-btn{
+    transform: scale(1); 
+    margin-left: auto;  
     margin-right: 10px;
-    align-self: center;
+    align-self: center;  
     cursor: pointer;
+    padding: 10px 20px;   
+    border: none;         
+    background-color: #f44336;
 }
 
 #logout-button{
@@ -107,6 +110,10 @@ body{
     background: red;
     cursor: pointer;
     font-size: 20px;
+}
+
+.remove-med-btn:hover {
+    background-color: #d32f2f;
 }
 
 #add-medication-button{

@@ -6,7 +6,7 @@ form.addEventListener('submit', async (e) => {
     const medication = {
         name: document.getElementById("medication-name").value.trim(),
         start_date: document.getElementById("start-date").value,
-        times_per_day: parseInt(document.getElementById("times_day_day").value),
+        times_per_day: parseInt(document.getElementById("times_per_day").value),
         dosage: parseFloat(document.getElementById("dosage").value),
         dosage_unit: document.getElementById("dosage-unit").value,
         quantity: parseInt(document.getElementById("quantity").value),
