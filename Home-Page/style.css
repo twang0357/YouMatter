@@ -60,6 +60,7 @@ body{
     padding: 10px;
     margin: 10px;
     width: 100%;
+    width: 600px;
 }
 
 .med-dosage{
@@ -70,6 +71,7 @@ body{
     padding: 10px;
     margin: 10px;
     width: auto;
+    width: 100px;
 }
 
 .med-dosage-unit{
@@ -127,6 +129,22 @@ body{
     color: white;
 }
 
+.medication-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    gap: 10px;
+    margin: 20px 0;
+    font-weight: bold;
+    color: black;
+}
+
+.med-name-header, .med-dosage-header {
+    text-align: center;
+}
+
+.med-time-header {
+    text-align: left;
+}
 
 
 

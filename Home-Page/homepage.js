@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          console.log('Notification was granted!');
+        } else {
+          alert('Please enable notifications for reminders to work.');
+        }
+      });
 
     const accountID = localStorage.getItem('account_id');
 
@@ -60,8 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.innerHTML = `
                 <div class="medication-item">
                     <span class="med-name">${medication.name}</span>
-                    <span class="med-dosage">${medication.dosage}</span>
-                    <span class="med-dosage-unit">${medication.dosage_unit}</span>
+                    <span class="med-dosage">${medication.dosage} ${medication.dosage_unit}</span>
                     ${reminderHTML}
                     <button class="remove-med-btn" data-id="${medication.medication_id}">Remove</button>
                 </div>`;
@@ -93,5 +98,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // Run functions
     getuserInfo();
     getMedications();
+    
+    const notifSet = new Set();
+
+    setInterval(async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/medications/today/${accountID}`);
+            const medications = await response.json();
+    
+            const now = new Date();
+            const currentTime = now.toTimeString().slice(0, 5);
+    
+            medications.forEach(medication => {
+                const uniqueNotification = `${medication.medication_id}-${currentTime}`;
+                if (medication.reminder_times.includes(currentTime) && !notifSet.has(uniqueNotification)) {
+                    new Notification("Medication Reminder", {
+                        body: `Time to take ${medication.name} - ${medication.dosage} ${medication.dosage_unit}`,
+                    });
+                    notifSet.add(uniqueNotification);
+                }
+            });
+        } catch (error) {
+            console.error("Error checking reminder notifications:", error);
+        }
+    }, 10000)
+
+    setInterval(()=> {
+        notifSet.clear()
+    }, 3600000)
+    
     setInterval(getMedications, 60000);
 });
